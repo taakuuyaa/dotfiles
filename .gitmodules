@@ -4,3 +4,6 @@
 [submodule "cool-peco"]
 	path = cool-peco
 	url = https://github.com/ryoppy/cool-peco.git
+	ignore = dirty
+[submodule "submod-repo"]
+	ignore = dirty
