@@ -2,7 +2,7 @@ git submodule update --init --recursive
 
 # prezto
 setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/zprezto/runcoms/^README.md(.N); do
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 
@@ -11,8 +11,9 @@ IGNORE_PATTERN="^\.(git|gitmodules|travis)"
 
 echo "Create dotfile links."
 for dotfile in .??*; do
-    [[ $dotfile =~ $IGNORE_PATTERN ]] && continue
-    ln -snfv "$(pwd)/$dotfile" "$HOME/$dotfile"
+  ln -sf $DOTDIR/zsh/zprezto $HOME/.zprezto
+  ln -sf $DOTDIR/zsh/.zshrc $HOME/.zshrc
+  ln -sf $DOTDIR/zsh/.zpreztorc $HOME/.zpreztorc
 done
 echo "Success"
 
