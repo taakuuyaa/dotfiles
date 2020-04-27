@@ -1,5 +1,5 @@
-[submodule "zsh/.zprezto"]
-	path = zsh/.zprezto
+[submodule "zsh/zprezto"]
+	path = zsh/zprezto
 	url = https://github.com/sorin-ionescu/prezto.git
 [submodule "zsh/cool-peco"]
 	path = zsh/cool-peco
