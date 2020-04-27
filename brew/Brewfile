@@ -4,42 +4,35 @@ tap "homebrew/core"
 tap "rcmdnk/rcmdnkpac"
 tap "sanemat/font"
 
-brew "anyenv"
 brew "awscli"
-brew "cocoapods"
 brew "git"
 brew "git-now"
 brew "jq"
-brew "mackup"
-brew "macvim"
 brew "mas"
-brew "mysql-client@5.7"
-brew "rmtrash"
 brew "sanemat/font/ricty", args: ["with-powerline"]
-brew "starship"
-brew "tmux"
-brew "tree"
-brew "wget"
 brew "yarn"
-brew "zplug"
-brew "zsh"
+brew "peco"
+brew "ghq"
 
 cask_args appdir: "/Applications"
 cask "alfred"
 cask "appcleaner"
 cask "docker"
-cask "dropbox"
+cask 'github'
 cask "google-chrome"
 cask "google-japanese-ime"
 cask "iterm2"
 cask "jetbrains-toolbox"
 cask "karabiner-elements"
 cask "notion"
-cask "shiftit"
 cask "zoomus"
+cask "postman"
+cask "kobo"
+cask "visual-studio-code"
 
 mas "LINE", id: 539883307
-mas "Skitch", id: 425955336
 mas "Slack", id: 803453959
 mas "Spark", id: 1176895641
-mas "Mate Translate", id: 1005088137
+mas "Evernote", id: 406056744
+mas "PopClip", id: 445189367
+mas "Todoist: To-Do List & Tasks", id: 585829637
