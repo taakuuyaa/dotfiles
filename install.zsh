@@ -6,8 +6,8 @@
 
 export DOTDIR=$(PWD)
 
-source $DOTDIR/etc/lib/echos.zsh
-source $DOTDIR/etc/lib/requires.zsh
+source $DOTDIR/lib_sh/echos.zsh
+source $DOTDIR/lib_sh/requires.zsh
 
 bot "Hi! I'm going to install tooling and tweak your system settings. Here I go..."
 
