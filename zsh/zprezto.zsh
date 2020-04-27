@@ -10,11 +10,9 @@ done
 IGNORE_PATTERN="^\.(git|gitmodules|travis)"
 
 echo "Create dotfile links."
-for dotfile in .??*; do
-  ln -sf $DOTDIR/zsh/zprezto $HOME/.zprezto
-  ln -sf $DOTDIR/zsh/.zshrc $HOME/.zshrc
-  ln -sf $DOTDIR/zsh/.zpreztorc $HOME/.zpreztorc
-done
+ln -sf $DOTDIR/zsh/zprezto $HOME/.zprezto
+ln -sf $DOTDIR/zsh/.zshrc $HOME/.zshrc
+ln -sf $DOTDIR/zsh/.zpreztorc $HOME/.zpreztorc
 echo "Success"
 
 # change shell
