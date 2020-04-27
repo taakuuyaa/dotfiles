@@ -7,7 +7,6 @@ fi
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 # alias
-## git
 alias g='git'
 alias ga='git add'
 alias gd='git diff'
@@ -16,10 +15,8 @@ alias gp='git push'
 alias gb='git branch'
 alias gc='git commit'
 alias gl='git log'
-## docker
 alias d='docker'
 alias dc='docker-compose'
-
 alias ls='clear && ls -G'
 alias ll='clear && ls -alF'
 alias ...='cd ../..'
@@ -28,31 +25,27 @@ alias c='pbcopy'
 alias o='open'
 alias s='ssh'
 alias v='vim'
+alias vi='vim'
 alias r='clear'
 
 ## zsh
 alias sz='source ~/.zshrc'
 alias vz='vi ~/.zshrc'
 
-## setting
-setopt nonomatch
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-
-# rbenv
-eval "$(rbenv init -)"
-
 # === cool-peco init ===
-FPATH="$FPATH:$HOME/dotfiles/cool-peco"
+FPATH="$FPATH:$HOME/dotfiles/zsh/cool-peco"
 autoload -Uz cool-peco
 cool-peco
 # ======================
-
-bindkey '^r' cool-peco-history # ctrl+r
+bindkey '^r' cool-peco-history
 bindkey '^h' cool-peco-ssh
 bindkey '^p' cool-peco-ps
+bindkey '^f' cool-peco-ghq
 
 alias ff=cool-peco-filename-search
 alias gbb=cool-peco-git-checkout
 alias gll=cool-peco-git-log
 alias ta=cool-peco-tmux-session
 alias cg=cool-peco-ghq
+
+source $HOME/.zshenv

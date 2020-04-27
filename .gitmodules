@@ -1,9 +1,6 @@
-[submodule ".zprezto"]
-	path = .zprezto
+[submodule "zsh/.zprezto"]
+	path = zsh/.zprezto
 	url = https://github.com/sorin-ionescu/prezto.git
-[submodule "cool-peco"]
-	path = cool-peco
+[submodule "zsh/cool-peco"]
+	path = zsh/cool-peco
 	url = https://github.com/ryoppy/cool-peco.git
-	ignore = dirty
-[submodule "submod-repo"]
-	ignore = dirty
