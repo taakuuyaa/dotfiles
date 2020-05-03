@@ -1,3 +1,4 @@
+source $DOTDIR/brew/command_line_tools.zsh
 source $DOTDIR/brew/install.zsh
 source $DOTDIR/brew/upgrade.zsh
 source $DOTDIR/brew/doctor.zsh
