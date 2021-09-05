@@ -9,6 +9,8 @@ brew "git"
 brew "git-now"
 brew "jq"
 brew "mas"
+brew "exa"
+brew "bat"
 brew "sanemat/font/ricty", args: ["with-powerline"]
 brew "yarn"
 brew "peco"
@@ -33,6 +35,4 @@ cask "visual-studio-code"
 mas "LINE", id: 539883307
 mas "Slack", id: 803453959
 mas "Spark", id: 1176895641
-mas "Evernote", id: 406056744
 mas "PopClip", id: 445189367
-mas "Todoist: To-Do List & Tasks", id: 585829637
