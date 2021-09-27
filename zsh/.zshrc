@@ -1,11 +1,3 @@
-# Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
-# Customize to your needs...
-fpath=(/usr/local/share/zsh-completions $fpath)
-
 # alias
 alias g='git'
 alias ga='git add'
@@ -69,5 +61,4 @@ alias ta=cool-peco-tmux-session
 source $HOME/.zshenv
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/Cellar/tfenv/2.0.0/versions/0.12.7/terraform terraform
 complete -C '/usr/local/bin/aws_completer' aws
