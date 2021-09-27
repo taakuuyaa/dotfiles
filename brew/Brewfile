@@ -4,6 +4,8 @@ tap "homebrew/core"
 tap "rcmdnk/rcmdnkpac"
 tap "sanemat/font"
 
+brew "stow"
+brew "starship"
 brew "awscli"
 brew "git"
 brew "git-now"
