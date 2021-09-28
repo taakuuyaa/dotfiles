@@ -1,4 +1,4 @@
-[submodule "zsh/cool-peco"]
-	path = zsh/cool-peco
+[submodule "cool-peco"]
+	path = cool-peco
 	url = https://github.com/ryoppy/cool-peco.git
 	ignore = dirty
