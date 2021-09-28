@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+
+log() {
+  message=$1
+  echo 📌 "$message"
+}
+
+log Start!!!
+
+cd "$HOME" || exit
+
+DOTFILES_PATH="$HOME/dotfiles"
+
+# Git clone dotfiles
+if [ ! -d "$DOTFILES_PATH" ]; then
+  log 'Git clone dotfiles'
+  git clone --recursive https://github.com/taakuuyaa/dotfiles.git
+else
+  log 'Already git clone dotfiles'
+fi
+
+# Setup Homebrew
+if [ ! -f /usr/local/bin/brew ]; then
+  log 'Setup Homebrew'
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+  log 'Already setup Homebrew'
+fi
+
+# Homebrew Bundle
+log 'Homebrew Bundle'
+brew bundle -v --file "$DOTFILES_PATH/Brewfile"
+
+# rcm
+log 'Link dotfiles'
+env RCRC="$DOTFILES_PATH/rcrc" rcup
+
+log End!!!
