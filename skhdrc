@@ -1,0 +1,44 @@
+## ----------------------------------------
+## Windows Focusing
+## ----------------------------------------
+alt - x : yabai -m window --focus recent
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
+
+## ----------------------------------------
+## Windows Swapping
+## ----------------------------------------
+alt - r         : yabai -m space --rotate 90
+shift + alt - x : yabai -m window --swap recent
+shift + alt - h : yabai -m window --swap west
+shift + alt - j : yabai -m window --swap south
+shift + alt - k : yabai -m window --swap north
+shift + alt - l : yabai -m window --swap east
+
+## ----------------------------------------
+## Windows Sizing
+## ----------------------------------------
+alt - left  : yabai -m window --resize left:-20:0  || yabai -m window --resize right:-20:0
+alt - right : yabai -m window --resize right:20:0  || yabai -m window --resize left:20:0
+alt - up    : yabai -m window --resize top:0:-20   || yabai -m window --resize bottom:0:-20
+alt - down  : yabai -m window --resize bottom:0:20 || yabai -m window --resize top:0:20
+
+## ----------------------------------------
+## Align in same Size
+## ----------------------------------------
+shift + alt - return : yabai -m space --balance
+
+## ----------------------------------------
+## Toggle Desktop Offset
+## ----------------------------------------
+alt - a : yabai -m space --toggle padding && yabai -m space --toggle gap
+
+## ----------------------------------------
+## Toggle Window Zoom
+## ----------------------------------------
+alt - d : yabai -m window --toggle zoom-parent
+alt - f : yabai -m window --toggle zoom-fullscreen
+shift + alt - f : yabai -m window --toggle native-fullscreen
+
