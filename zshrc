@@ -58,11 +58,6 @@ alias gbb=cool-peco-git-checkout
 alias gll=cool-peco-git-log
 alias ta=cool-peco-tmux-session
 
-
-autoload -Uz compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-complete -C '/usr/local/bin/aws_completer' aws
-
 # zsh-autosuggestions
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh-syntax-highlighting
@@ -74,6 +69,10 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
+
+autoload -Uz compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+complete -C '/usr/local/bin/aws_completer' aws
 
 # starship
 eval "$(starship init zsh)"
