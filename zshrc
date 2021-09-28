@@ -76,4 +76,4 @@ eval "$(starship init zsh)"
 # asdf
 . /usr/local/opt/asdf/libexec/asdf.sh
 # direnv
-eval "$(asdf exec direnv hook zsh)"
+eval "$(direnv hook zsh)"
