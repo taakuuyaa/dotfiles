@@ -40,8 +40,9 @@ cask "notion"
 cask "postman"
 cask "slack"
 cask "visual-studio-code"
-cask "zoomus"
+cask "zoom"
 
+mas "Just Focus", id: 1142151959
 mas "LINE", id: 539883307
 mas "Spark", id: 1176895641
 mas "PopClip", id: 445189367
