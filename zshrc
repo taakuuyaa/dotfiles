@@ -13,6 +13,7 @@ alias ls='clear && exa'
 alias ll='clear && ls -alF'
 alias cat='bat'
 alias fd='fd -H'
+alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias c='pbcopy'
@@ -58,8 +59,6 @@ alias gll=cool-peco-git-log
 alias ta=cool-peco-tmux-session
 
 
-source $HOME/.zshenv
-
 autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 complete -C '/usr/local/bin/aws_completer' aws
@@ -75,3 +74,10 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
+
+# starship
+eval "$(starship init zsh)"
+# asdf
+. /usr/local/opt/asdf/libexec/asdf.sh
+# direnv
+eval "$(asdf exec direnv hook zsh)"
