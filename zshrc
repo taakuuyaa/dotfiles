@@ -1,3 +1,8 @@
+
+#### FIG ENV VARIABLES ####
+# Please make sure this block is at the start of this file.
+[ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
+#### END FIG ENV VARIABLES ####
 # alias
 alias g='git'
 alias ga='git add'
@@ -49,7 +54,7 @@ autoload -Uz cool-peco
 cool-peco
 # ======================
 bindkey '^r' cool-peco-history
-bindkey '^h' cool-peco-ssh
+bindkey '^g' cool-peco-ssh
 bindkey '^p' cool-peco-ps
 bindkey '^f' cool-peco-ghq
 
@@ -77,3 +82,8 @@ eval "$(starship init zsh)"
 . /usr/local/opt/asdf/libexec/asdf.sh
 # direnv
 eval "$(direnv hook zsh)"
+
+#### FIG ENV VARIABLES ####
+# Please make sure this block is at the end of this file.
+[ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
+#### END FIG ENV VARIABLES ####
