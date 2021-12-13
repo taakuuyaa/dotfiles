@@ -64,9 +64,9 @@ alias gll=cool-peco-git-log
 alias ta=cool-peco-tmux-session
 
 # zsh-autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh-syntax-highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-completions
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -79,7 +79,7 @@ complete -C '/usr/local/bin/aws_completer' aws
 # starship
 eval "$(starship init zsh)"
 # asdf
-. /usr/local/opt/asdf/libexec/asdf.sh
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 # direnv
 eval "$(direnv hook zsh)"
 
