@@ -8,7 +8,7 @@ dotfiles managed by these libraries
 1. Run install script
 
 ```sh
-curl -o - https://raw.githubusercontent.com/taakuuyaa/dotfiles/master/install | sh
+sudo curl -o - https://raw.githubusercontent.com/taakuuyaa/dotfiles/master/install | sh
 ```
 
 2. Start Window Manager
