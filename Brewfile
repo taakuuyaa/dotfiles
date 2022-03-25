@@ -11,6 +11,7 @@ brew "bat"
 brew "curl"
 brew "exa"
 brew "fig"
+brew "gh"
 brew "ghq"
 brew "git"
 brew "jq"
@@ -42,8 +43,8 @@ cask "notion"
 cask "postman"
 cask "slack"
 cask "visual-studio-code"
-cask "zoom"
 
+mas "Twilio Authy", id: 494168017
 mas "Just Focus", id: 1142151959
 mas "LINE", id: 539883307
 mas "Spark", id: 1176895641
