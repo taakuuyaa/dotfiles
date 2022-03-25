@@ -10,10 +10,3 @@ dotfiles managed by these libraries
 ```sh
 sudo curl -o - https://raw.githubusercontent.com/taakuuyaa/dotfiles/master/install | sh
 ```
-
-2. Start Window Manager
-
-```sh
-brew services start yabai
-brew services start skhd
-```
