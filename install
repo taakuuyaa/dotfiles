@@ -29,10 +29,14 @@ fi
 
 # Homebrew Bundle
 log 'Homebrew Bundle'
-brew bundle -v --file "$DOTFILES_PATH/Brewfile"
+brew bundle --file "$DOTFILES_PATH/Brewfile"
 
 # rcm
 log 'Link dotfiles'
 env RCRC="$DOTFILES_PATH/rcrc" rcup
+
+# Mac Setting
+log 'Mac Setting'
+$DOTFILES_PATH/lib/mac/setup.sh
 
 log End!!!

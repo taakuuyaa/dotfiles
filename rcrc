@@ -1,2 +1,2 @@
-EXCLUDES="README.md install cool-peco"
+EXCLUDES="README.md install lib"
 DOTFILES_DIRS="$HOME/dotfiles"

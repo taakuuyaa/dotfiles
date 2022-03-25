@@ -49,7 +49,7 @@ setopt hist_ignore_space
 setopt hist_no_store
 
 # === cool-peco init ===
-FPATH="$FPATH:$HOME/dotfiles/cool-peco"
+FPATH="$FPATH:$HOME/dotfiles/lib/cool-peco"
 autoload -Uz cool-peco
 cool-peco
 # ======================
