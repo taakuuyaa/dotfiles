@@ -29,6 +29,7 @@ alias vi='vim'
 alias r='clear'
 alias tf='terraform'
 alias vssh='vi ~/.ssh/config'
+alias rbm='rubymine'
 
 ## zsh
 alias sz='source ~/.zshrc'
@@ -64,9 +65,9 @@ alias gll=cool-peco-git-log
 alias ta=cool-peco-tmux-session
 
 # zsh-autosuggestions
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zsh-syntax-highlighting
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-completions
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -79,7 +80,7 @@ complete -C '/usr/local/bin/aws_completer' aws
 # starship
 eval "$(starship init zsh)"
 # asdf
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+. /usr/local/opt/asdf/libexec/asdf.sh
 # direnv
 eval "$(direnv hook zsh)"
 
