@@ -23,6 +23,7 @@ brew "stow"
 brew "starship"
 brew "ytop"
 brew "yarn"
+brew "zinit"
 brew "zsh-autosuggestions"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
@@ -44,9 +45,10 @@ cask "karabiner-elements"
 cask "notion"
 cask "postman"
 cask "slack"
+cask "stoplight-studio"
 cask "visual-studio-code"
 
 mas "Just Focus", id: 1142151959
-mas "LINE", id: 539883307
+mas "Magnet", id: 441258766
 mas "Spark", id: 1176895641
 mas "PopClip", id: 445189367
