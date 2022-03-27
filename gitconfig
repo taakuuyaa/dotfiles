@@ -1,0 +1,14 @@
+[user]
+	email = 51745522+taakuuyaa@users.noreply.github.com
+	name = taakuuyaa
+[core]
+	excludesfile = ~/.gitignore
+	editor = vim
+	ignorecase = false
+	quotepath = false
+[color]
+	ui = auto
+[push]
+	default = current
+[init]
+	defaultBranch = main
