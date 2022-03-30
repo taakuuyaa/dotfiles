@@ -11,6 +11,9 @@ cd "$HOME" || exit
 
 DOTFILES_PATH="$HOME/dotfiles"
 
+# Install Rosseta2
+sudo softwareupdate --install-rosetta
+
 # Git clone dotfiles
 if [ ! -d "$DOTFILES_PATH" ]; then
   log 'Git clone dotfiles'
@@ -26,6 +29,10 @@ if [ ! -f /usr/local/bin/brew ]; then
 else
   log 'Already setup Homebrew'
 fi
+
+# brew doctor
+log 'brew doctor && update'
+brew doctor && brew update
 
 # Homebrew Bundle
 log 'Homebrew Bundle'
