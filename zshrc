@@ -1,8 +1,29 @@
+alias change_profile='(){echo -e "\033]1337;SetProfile=$1\a"}'
 
-#### FIG ENV VARIABLES ####
-# Please make sure this block is at the start of this file.
-[ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
-#### END FIG ENV VARIABLES ####
+if [ "$(uname -m)" = "arm64" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  export PATH="/opt/homebrew/bin:$PATH"
+
+  . /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+  # coreutils
+  export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+
+  # arm64
+  change_profile ARM
+else
+  eval "$(/usr/local/bin/brew shellenv)"
+
+  export ASDF_DATA_DIR=~/.asdf_x86
+  . /usr/local/opt/asdf/libexec/asdf.sh
+
+  # coreutils
+  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+  # x86_64
+  change_profile Intel
+fi
+
 # alias
 alias g='git'
 alias ga='git add'
@@ -30,15 +51,20 @@ alias r='clear'
 alias tf='terraform'
 alias vssh='vi ~/.ssh/config'
 
+alias arm64e='arch -arm64e zsh'
+alias x86_64='arch -x86_64 zsh'
+
 ## zsh
 alias sz='source ~/.zshrc'
 alias vz='vi ~/.zshrc'
-alias ve='vi ~/.zshenv'
 
 ## zsh opt
-# 履歴ファイルの保存先
-HISTFILE=~/.zsh_history
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=1000
+export SAVEHIST=100000
 
+# 開始・終了時刻を記録する
+setopt extended_history
 # 重複を記録しない
 setopt hist_ignore_dups
 # historyを共有
@@ -48,42 +74,39 @@ setopt hist_ignore_space
 # historyコマンドは履歴に登録しない
 setopt hist_no_store
 
-# === cool-peco init ===
-FPATH="$FPATH:$HOME/dotfiles/lib/cool-peco"
-autoload -Uz cool-peco
-cool-peco
-# ======================
-bindkey '^r' cool-peco-history
-bindkey '^g' cool-peco-ssh
-bindkey '^p' cool-peco-ps
-bindkey '^f' cool-peco-ghq
-
-alias ff=cool-peco-filename-search
-alias gbb=cool-peco-git-checkout
-alias gll=cool-peco-git-log
-alias ta=cool-peco-tmux-session
-
-# zsh-autosuggestions
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# zsh-syntax-highlighting
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# zsh-completions
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+  print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+  command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+  command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+    print -P "%F{33} %F{34}Installation successful.%f%b" || \
+    print -P "%F{160} The clone has failed.%f%b"
 fi
 
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of Zinit's installer chunk
+
+zinit light johnhamelink/env-zsh
+zinit light scmbreeze/scm_breeze
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma/fast-syntax-highlighting
+zinit light mollifier/anyframe
+
+bindkey '^f' anyframe-widget-cdr
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+bindkey '^r' anyframe-widget-execute-history
+bindkey '^b' anyframe-widget-checkout-git-branch
+bindkey '^g' anyframe-widget-cd-ghq-repository
+bindkey '^k' anyframe-widget-kill
+
 autoload -Uz compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-complete -C '/usr/local/bin/aws_completer' aws
+autoload bashcompinit && bashcompinit
+complete -C '/opt/homebrew/bin/aws_completer' aws
 
 # starship
 eval "$(starship init zsh)"
-# asdf
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
 # direnv
 eval "$(direnv hook zsh)"
-
-#### FIG ENV VARIABLES ####
-# Please make sure this block is at the end of this file.
-[ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
-#### END FIG ENV VARIABLES ####
