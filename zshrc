@@ -51,8 +51,8 @@ alias r='clear'
 alias tf='terraform'
 alias vssh='vi ~/.ssh/config'
 
-alias arm64e='arch -arm64e zsh'
-alias x86_64='arch -x86_64 zsh'
+alias arm='arch -arm64e zsh'
+alias amd='arch -x86_64 zsh'
 
 ## zsh
 alias sz='source ~/.zshrc'
