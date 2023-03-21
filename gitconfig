@@ -6,6 +6,7 @@
 	editor = vim
 	ignorecase = false
 	quotepath = false
+	autocrlf = input
 [color]
 	ui = auto
 [push]
