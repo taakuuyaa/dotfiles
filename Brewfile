@@ -27,6 +27,7 @@ brew "zinit"
 brew "zsh-autosuggestions"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
+brew "podman-desktop"
 
 cask "alacritty"
 cask "alfred"
