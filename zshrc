@@ -1,62 +1,10 @@
-alias change_profile='(){echo -e "\033]1337;SetProfile=$1\a"}'
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="/opt/homebrew/bin:$PATH"
 
-if [ "$(uname -m)" = "arm64" ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-  export PATH="/opt/homebrew/bin:$PATH"
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
-  . /opt/homebrew/opt/asdf/libexec/asdf.sh
-
-  # coreutils
-  export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-
-  # arm64
-  change_profile ARM
-else
-  eval "$(/usr/local/bin/brew shellenv)"
-
-  export ASDF_DATA_DIR=~/.asdf_x86
-  . /usr/local/opt/asdf/libexec/asdf.sh
-
-  # coreutils
-  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-
-  # x86_64
-  change_profile Intel
-fi
-
-# alias
-alias g='git'
-alias ga='git add'
-alias gd='git diff'
-alias gs='git status'
-alias gp='git push'
-alias gb='git branch'
-alias gc='git commit'
-alias gl='git log'
-alias d='docker'
-alias dc='docker compose'
-alias ls='clear && exa'
-alias ll='clear && ls -alF'
-alias cat='bat'
-alias fd='fd -H'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias c='pbcopy'
-alias o='open'
-alias s='ssh'
-alias v='vim'
-alias vi='vim'
-alias r='clear'
-alias tf='terraform'
-alias vssh='vi ~/.ssh/config'
-
-alias arm='arch -arm64e zsh'
-alias amd='arch -x86_64 zsh'
-
-## zsh
-alias sz='source ~/.zshrc'
-alias vz='vi ~/.zshrc'
+# coreutils
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 
 ## zsh opt
 export HISTFILE=${HOME}/.zsh_history
@@ -110,3 +58,34 @@ complete -C '/opt/homebrew/bin/aws_completer' aws
 eval "$(starship init zsh)"
 # direnv
 eval "$(direnv hook zsh)"
+
+# alias
+alias g='git'
+alias ga='git add'
+alias gd='git diff'
+alias gs='git status'
+alias gp='git push'
+alias gb='git branch'
+alias gc='git commit'
+alias gl='git log'
+alias d='docker'
+alias dc='docker compose'
+alias ls='clear && exa'
+alias ll='clear && ls -alF'
+alias cat='bat'
+alias fd='fd -H'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias c='pbcopy'
+alias o='open'
+alias s='ssh'
+alias v='vim'
+alias vi='vim'
+alias r='clear'
+alias tf='terraform'
+alias vssh='vi ~/.ssh/config'
+
+## zsh
+alias sz='source ~/.zshrc'
+alias vz='vi ~/.zshrc'
