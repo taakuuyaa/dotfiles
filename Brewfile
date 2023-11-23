@@ -45,7 +45,6 @@ cask "karabiner-elements"
 cask "notion"
 cask "postman"
 cask "slack"
-cask "stoplight-studio"
 cask "visual-studio-code"
 
 mas "Just Focus", id: 1142151959
