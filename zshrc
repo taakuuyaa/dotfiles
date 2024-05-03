@@ -1,10 +1,41 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# homebrew
 export PATH="/opt/homebrew/bin:$PATH"
 
+# asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # coreutils
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+
+# alias
+alias g='git'
+alias ga='git add'
+alias gd='git diff'
+alias gs='git status'
+alias gp='git push'
+alias gb='git branch'
+alias gc='git commit'
+alias gl='git log'
+alias d='docker'
+alias dc='docker compose'
+alias tf='terraform'
+
+alias ls='eza $eza_params'
+alias ll='eza --all --header --long $eza_params'
+alias tree='eza --tree $eza_params'
+
+alias cat='bat'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias c='pbcopy'
+alias o='open'
+alias v='vim'
+alias r='clear'
+
+## zsh
+alias sz='source ~/.zshrc'
+alias vz='v ~/.zshrc'
 
 ## zsh opt
 export HISTFILE=${HOME}/.zsh_history
@@ -37,14 +68,14 @@ autoload -Uz _zinit
 ### End of Zinit's installer chunk
 
 zinit light johnhamelink/env-zsh
-zinit light scmbreeze/scm_breeze
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 zinit light mollifier/anyframe
 
-bindkey '^f' anyframe-widget-cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
+
+bindkey '^f' anyframe-widget-cdr
 bindkey '^r' anyframe-widget-execute-history
 bindkey '^b' anyframe-widget-checkout-git-branch
 bindkey '^g' anyframe-widget-cd-ghq-repository
