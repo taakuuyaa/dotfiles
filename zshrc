@@ -89,34 +89,3 @@ complete -C '/opt/homebrew/bin/aws_completer' aws
 eval "$(starship init zsh)"
 # direnv
 eval "$(direnv hook zsh)"
-
-# alias
-alias g='git'
-alias ga='git add'
-alias gd='git diff'
-alias gs='git status'
-alias gp='git push'
-alias gb='git branch'
-alias gc='git commit'
-alias gl='git log'
-alias d='docker'
-alias dc='docker compose'
-alias ls='clear && exa'
-alias ll='clear && ls -alF'
-alias cat='bat'
-alias fd='fd -H'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias c='pbcopy'
-alias o='open'
-alias s='ssh'
-alias v='vim'
-alias vi='vim'
-alias r='clear'
-alias tf='terraform'
-alias vssh='vi ~/.ssh/config'
-
-## zsh
-alias sz='source ~/.zshrc'
-alias vz='vi ~/.zshrc'
