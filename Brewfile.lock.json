@@ -5,10 +5,10 @@
         "revision": "fbccc15d60ff1160eacf00128b3d9226f7c78945"
       },
       "homebrew/cask": {
-        "revision": "facdeb7469d922edbcc96e2d67312dd81a9d0c5f"
+        "revision": "74275e04ea6137c7afc697d988d10faa76b9dd83"
       },
       "homebrew/core": {
-        "revision": "92a34484c0d391c3d87da755bbd83d2a22c0b3a4"
+        "revision": "daed19bbb5dbf3554c974f812f13bf0bbf6a27d9"
       },
       "homebrew/cask-fonts": {
         "revision": "caaebf6ca91ea5b0f9ebbc3e1294a486d40a3734"
@@ -1022,7 +1022,7 @@
         }
       },
       "spotify": {
-        "version": "1.2.35.663,b699649e,5769",
+        "version": "1.2.36.959,04bf500c,859",
         "options": {
           "full_name": "spotify"
         }
