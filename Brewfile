@@ -49,7 +49,6 @@ cask "amie"
 cask "linear-linear"
 cask "spotify"
 
-mas "Just Focus", id: 1142151959
 mas "Magnet", id: 441258766
 mas "Spark", id: 1176895641
 mas "PopClip", id: 445189367
