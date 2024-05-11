@@ -33,6 +33,12 @@ alias o='open'
 alias v='vim'
 alias r='clear'
 
+alias f=anyframe-widget-cdr
+alias r=anyframe-widget-execute-history
+alias b=anyframe-widget-checkout-git-branch
+alias g=anyframe-widget-cd-ghq-repository
+alias k=anyframe-widget-kil
+
 ## zsh
 alias sz='source ~/.zshrc'
 alias vz='v ~/.zshrc'
@@ -89,3 +95,8 @@ complete -C '/opt/homebrew/bin/aws_completer' aws
 eval "$(starship init zsh)"
 # direnv
 eval "$(direnv hook zsh)"
+
+extra_functions_file="$HOME/.extra_functions.sh"
+if [ -f "$extra_functions_file" ]; then
+    source "$extra_functions_file"
+fi
