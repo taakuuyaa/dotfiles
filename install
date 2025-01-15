@@ -1,42 +1,50 @@
 #!/usr/bin/env sh
 
+set -e
+
 log() {
-  message=$1
-  echo 📌 "$message"
+  echo "📌 $1"
 }
 
-log Start!!!
-
-cd "$HOME" || exit
+log "Start!!!"
 
 DOTFILES_PATH="$HOME/dotfiles"
 
 # Git clone dotfiles
 if [ ! -d "$DOTFILES_PATH" ]; then
-  log 'Git clone dotfiles'
-  git clone --recursive https://github.com/taakuuyaa/dotfiles.git
+  log "Cloning dotfiles repository..."
+  git clone --recursive https://github.com/taakuuyaa/dotfiles.git "$DOTFILES_PATH"
 else
-  log 'Already git clone dotfiles'
+  log "Dotfiles repository already exists. Skipping clone."
 fi
 
 # Setup Homebrew
-if [ ! -f /usr/local/bin/brew ]; then
-  log 'Setup Homebrew'
+if ! command -v brew >/dev/null 2>&1; then
+  log "Installing Homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-  log 'Already setup Homebrew'
+  log "Homebrew is already installed."
 fi
 
-# brew doctor
-log 'brew doctor && update'
-brew doctor && brew update
+# Update and check Homebrew
+log "Running brew doctor and brew update..."
+brew doctor
+brew update
 
-# Homebrew Bundle
-log 'Homebrew Bundle'
-brew bundle --file "$DOTFILES_PATH/Brewfile"
+# Install Homebrew Bundle
+if [ -f "$DOTFILES_PATH/Brewfile" ]; then
+  log "Installing packages from Brewfile..."
+  brew bundle --file="$DOTFILES_PATH/Brewfile"
+else
+  log "Brewfile not found at $DOTFILES_PATH. Skipping Homebrew Bundle."
+fi
 
-# rcm
-log 'Link dotfiles'
-env RCRC="$DOTFILES_PATH/rcrc" rcup
+# Link dotfiles using rcm
+if command -v rcup >/dev/null 2>&1; then
+  log "Linking dotfiles with rcm..."
+  env RCRC="$DOTFILES_PATH/rcrc" rcup
+else
+  log "rcm is not installed. Please install it to link dotfiles."
+fi
 
-log End!!!
+log "End!!!"
