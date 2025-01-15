@@ -53,6 +53,7 @@ link_dotfiles() {
   fi
 }
 
+xcode-select --install
 clone_dotfiles
 install_homebrew
 update_homebrew
