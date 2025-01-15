@@ -7,6 +7,8 @@ export PATH="/opt/homebrew/bin:$PATH"
 # coreutils
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 
+export PATH="/opt/homebrew/sbin:$PATH"
+
 # alias
 alias g='git'
 alias ga='git add'
