@@ -30,7 +30,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias c='pbcopy'
 alias o='open'
-alias v='vim'
+alias v='idea'
 alias r='clear'
 
 alias f=anyframe-widget-cdr
@@ -52,12 +52,16 @@ export SAVEHIST=100000
 setopt extended_history
 # 重複を記録しない
 setopt hist_ignore_dups
+# 重複の場合、古い履歴を削除する
+setopt hist_ignore_all_dups
 # historyを共有
 setopt share_history
 # スペースで始まるコマンド行はヒストリリストから削除
 setopt hist_ignore_space
 # historyコマンドは履歴に登録しない
 setopt hist_no_store
+# 余分な空白は詰めて記録
+setopt hist_reduce_blanks
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -91,8 +95,6 @@ autoload -Uz compinit && compinit
 autoload bashcompinit && bashcompinit
 complete -C '/opt/homebrew/bin/aws_completer' aws
 
-# starship
-eval "$(starship init zsh)"
 # direnv
 eval "$(direnv hook zsh)"
 
