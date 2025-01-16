@@ -1,5 +1,4 @@
 tap "homebrew/bundle"
-tap "homebrew/core"
 
 brew "asdf"
 brew "awscli"
@@ -35,10 +34,10 @@ cask "jetbrains-toolbox"
 cask "karabiner-elements"
 cask "notion"
 cask "postman"
+cask "popclip"
 cask "slack"
 cask "raycast"
 cask "arc"
 cask "zoom"
 
 mas "Magnet", id: 441258766
-mas "PopClip", id: 445189367
