@@ -55,7 +55,6 @@ link_dotfiles() {
   fi
 }
 
-xcode-select --install
 # use with google-japanese-ime
 softwareupdate --install-rosetta
 
