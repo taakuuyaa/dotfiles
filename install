@@ -24,7 +24,9 @@ install_homebrew() {
   if ! command -v brew >/dev/null 2>&1; then
     log "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  else
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  els
+  e
     log "Homebrew is already installed."
   fi
 }
