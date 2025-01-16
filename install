@@ -55,6 +55,10 @@ link_dotfiles() {
   fi
 }
 
+xcode-select --install
+# use with google-japanese-ime
+softwareupdate --install-rosetta
+
 clone_dotfiles
 install_homebrew
 update_homebrew
