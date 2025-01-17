@@ -38,5 +38,3 @@ cask "slack"
 cask "raycast"
 cask "arc"
 cask "zoom"
-
-mas "Magnet", id: 441258766
