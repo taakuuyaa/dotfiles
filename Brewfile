@@ -1,6 +1,5 @@
 tap "homebrew/bundle"
 
-brew "asdf"
 brew "awscli"
 brew "bat"
 brew "curl"

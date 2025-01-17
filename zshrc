@@ -1,13 +1,7 @@
 # homebrew
 export PATH="/opt/homebrew/bin:$PATH"
-
-# asdf
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-
-# coreutils
-export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-
-export PATH="/opt/homebrew/sbin:$PATH"
+# mise
+eval "$(mise activate zsh)"
 
 # alias
 alias g='git'
@@ -96,9 +90,6 @@ bindkey '^k' anyframe-widget-kill
 autoload -Uz compinit && compinit
 autoload bashcompinit && bashcompinit
 complete -C '/opt/homebrew/bin/aws_completer' aws
-
-# direnv
-eval "$(direnv hook zsh)"
 
 extra_functions_file="$HOME/.extra_functions.sh"
 if [ -f "$extra_functions_file" ]; then
