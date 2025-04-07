@@ -35,7 +35,7 @@ alias f=anyframe-widget-cdr
 alias r=anyframe-widget-execute-history
 alias b=anyframe-widget-checkout-git-branch
 alias g=anyframe-widget-cd-ghq-repository
-alias k=anyframe-widget-kil
+alias k=anyframe-widget-kill
 
 ## zsh
 alias sz='source ~/.zshrc'
