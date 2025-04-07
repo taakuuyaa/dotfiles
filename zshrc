@@ -98,9 +98,6 @@ if [ -f "$extra_functions_file" ]; then
     source "$extra_functions_file"
 fi
 
-# Added by Windsurf
-export PATH="/Users/katotakuya/.codeium/windsurf/bin:$PATH"
-
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
 
 # Amazon Q post block. Keep at the bottom of this file.
