@@ -91,9 +91,9 @@ autoload -Uz compinit && compinit
 autoload bashcompinit && bashcompinit
 complete -C '/opt/homebrew/bin/aws_completer' aws
 
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+
 extra_functions_file="$HOME/.extra_functions.sh"
 if [ -f "$extra_functions_file" ]; then
     source "$extra_functions_file"
 fi
-
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
