@@ -46,13 +46,18 @@ install_brew_bundle() {
   fi
 }
 
-link_dotfiles() {
-  if command -v rcup >/dev/null 2>&1; then
-    log "Linking dotfiles with rcm..."
-    env RCRC="$DOTFILES_PATH/rcrc" rcup
+install_chezmoi() {
+  if ! command -v chezmoi >/dev/null 2>&1; then
+    log "Installing chezmoi..."
+    brew install chezmoi
   else
-    log "rcm is not installed. Please install it to link dotfiles."
+    log "chezmoi is already installed."
   fi
+}
+
+apply_dotfiles() {
+  log "Applying dotfiles with chezmoi..."
+  chezmoi init --apply --source="$DOTFILES_PATH"
 }
 
 # use with google-japanese-ime
@@ -62,6 +67,7 @@ clone_dotfiles
 install_homebrew
 update_homebrew
 install_brew_bundle
-link_dotfiles
+install_chezmoi
+apply_dotfiles
 
 log "End!!!"

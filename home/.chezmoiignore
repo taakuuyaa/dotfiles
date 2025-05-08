@@ -1,0 +1,11 @@
+README.md
+install
+Brewfile
+Brewfile.lock.json
+.git/
+.github/
+.gitignore
+.chezmoiignore
+.chezmoi.toml.tmpl
+LICENSE
+*.md
