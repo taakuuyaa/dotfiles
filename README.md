@@ -16,7 +16,7 @@ A collection of personal dotfiles and configuration settings to quickly set up a
 
 This repository contains dotfiles managed by the following tools:
 
-- [rcm](https://github.com/thoughtbot/rcm) - A management suite for dotfiles
+- [chezmoi](https://github.com/twpayne/chezmoi) - A dotfile manager
 - [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) - Bundler for non-Ruby dependencies from Homebrew
 - [mise](https://github.com/jdx/mise) - Dev tools, environment variables, tasks (replacing asdf)
 
@@ -74,7 +74,7 @@ The installation script performs the following actions:
 4. Installs packages defined in the Brewfile, including:
    - CLI tools like git, jq, curl, etc.
    - Applications like Google Chrome, Slack, Docker, etc.
-5. Links dotfiles to your home directory using rcm
+5. Installs chezmoi and applies dotfiles to your home directory
 6. Installs Rosetta 2 for compatibility with Google Japanese IME
 
 ## ⚙️ Included Configurations
@@ -99,14 +99,30 @@ The Brewfile includes various useful tools and applications:
 
 After installation, you can customize your environment by:
 
-1. Modifying the dotfiles in your home directory
-2. Adding new configurations to the repository and re-running `rcup`
+1. Using chezmoi to manage your dotfiles:
+   ```sh
+   # Edit a dotfile
+   chezmoi edit ~/.zshrc
+   
+   # Apply changes
+   chezmoi apply
+   
+   # See what changes would be made
+   chezmoi diff
+   ```
+
+2. Adding new configurations:
+   ```sh
+   # Add an existing file to chezmoi
+   chezmoi add ~/.some_config_file
+   ```
+
 3. Editing the Brewfile to add or remove packages
 
-To update your dotfiles after making changes to the repository:
+To update your dotfiles after making changes:
 
 ```sh
-rcup
+chezmoi update
 ```
 
 To update installed packages:
