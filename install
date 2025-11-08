@@ -56,7 +56,7 @@ link_dotfiles() {
 }
 
 # use with google-japanese-ime
-softwareupdate --install-rosetta
+# softwareupdate --install-rosetta
 
 clone_dotfiles
 install_homebrew
