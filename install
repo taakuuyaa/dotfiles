@@ -2,66 +2,276 @@
 
 set -e
 
-log() {
-  echo "📌 $1"
-}
-
-log "Start!!!"
+# ==================== Configuration ====================
 
 DOTFILES_REPO="https://github.com/taakuuyaa/dotfiles.git"
 DOTFILES_PATH="$HOME/dotfiles"
 
-clone_dotfiles() {
-  if [ ! -d "$DOTFILES_PATH" ]; then
-    log "Cloning dotfiles repository..."
-    git clone --recursive "$DOTFILES_REPO" "$DOTFILES_PATH"
+# ==================== Logging Functions ====================
+
+log_header() {
+  echo ""
+  echo "╭─────────────────────────────────────────────────────────╮"
+  echo "│  $1"
+  echo "╰─────────────────────────────────────────────────────────╯"
+}
+
+log_step() {
+  echo "➜  $1"
+}
+
+log_success() {
+  echo "✅ $1"
+}
+
+log_info() {
+  echo "ℹ️  $1"
+}
+
+log_error() {
+  echo "❌ $1"
+}
+
+log_divider() {
+  echo "───────────────────────────────────────────────────────────"
+}
+
+# ==================== Spinner Functions ====================
+
+show_spinner() {
+  local delay=0.1
+  local spinstr='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
+  local msg="$1"
+
+  while true; do
+    local temp=${spinstr#?}
+    printf "\r  ${spinstr:0:1} $msg"
+    spinstr=$temp${spinstr:0:1}
+    sleep $delay
+  done
+}
+
+stop_spinner() {
+  if [ -n "$SPINNER_PID" ]; then
+    kill $SPINNER_PID 2>/dev/null || true
+    wait $SPINNER_PID 2>/dev/null || true
+    printf "\r\033[K"
+    SPINNER_PID=""
+  fi
+}
+
+start_spinner() {
+  show_spinner "$1" &
+  SPINNER_PID=$!
+  trap stop_spinner EXIT INT TERM
+}
+
+# ==================== Utility Functions ====================
+
+# Run command with spinner, return exit status
+run_with_spinner() {
+  local message="$1"
+  shift
+
+  start_spinner "$message"
+  set +e
+  "$@" >/dev/null 2>&1
+  local status=$?
+  set -e
+  stop_spinner
+
+  return $status
+}
+
+# Check if command succeeded
+check_success() {
+  local status=$1
+  local success_msg="$2"
+  local error_msg="$3"
+
+  if [ $status -eq 0 ]; then
+    log_success "$success_msg"
+    return 0
   else
-    log "Dotfiles repository already exists. Skipping clone."
+    if [ -n "$error_msg" ]; then
+      log_error "$error_msg"
+      exit 1
+    fi
+    return 1
+  fi
+}
+
+# ==================== Installation Functions ====================
+
+clone_dotfiles() {
+  log_divider
+  log_step "Checking dotfiles repository..."
+
+  if [ ! -d "$DOTFILES_PATH" ]; then
+    run_with_spinner "Cloning dotfiles repository..." \
+      git clone --recursive "$DOTFILES_REPO" "$DOTFILES_PATH"
+    check_success $? "Dotfiles repository cloned successfully" \
+      "Failed to clone dotfiles repository"
+  else
+    log_success "Dotfiles repository already exists"
   fi
 }
 
 install_homebrew() {
+  log_divider
+  log_step "Checking Homebrew..."
+
   if ! command -v brew >/dev/null 2>&1; then
-    log "Installing Homebrew..."
+    log_info "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    if [ $? -ne 0 ]; then
+      log_error "Failed to install Homebrew"
+      exit 1
+    fi
     eval "$(/opt/homebrew/bin/brew shellenv)"
     export PATH="/opt/homebrew/bin:$PATH"
+    log_success "Homebrew installed successfully"
   else
-    log "Homebrew is already installed."
+    log_success "Homebrew is already installed"
   fi
 }
 
 update_homebrew() {
-  log "Running brew doctor and brew update..."
-  brew doctor || log "brew doctor encountered an error, but continuing..."
-  brew update || log "brew update encountered an error, but continuing..."
+  log_divider
+  log_step "Updating Homebrew..."
+
+  # Run brew doctor (allow failure)
+  run_with_spinner "Running brew doctor..." brew doctor
+  if [ $? -eq 0 ]; then
+    log_success "brew doctor completed"
+  else
+    log_info "brew doctor found issues (continuing anyway)"
+  fi
+
+  # Run brew update (allow failure)
+  run_with_spinner "Running brew update..." brew update
+  if [ $? -eq 0 ]; then
+    log_success "brew update completed"
+  else
+    log_info "brew update had warnings (continuing anyway)"
+  fi
+
+  log_success "Homebrew update completed"
 }
 
 install_brew_bundle() {
+  log_divider
+  log_step "Installing packages from Brewfile..."
+
   if [ -f "$DOTFILES_PATH/Brewfile" ]; then
-    log "Installing packages from Brewfile..."
+    log_info "This may take 10-30 minutes depending on package count"
+    log_info "You may be prompted for your password or other input"
+    echo ""
+
+    # Run brew bundle with visible output (may prompt for password)
     brew bundle --file="$DOTFILES_PATH/Brewfile" -v
+
+    if [ $? -ne 0 ]; then
+      echo ""
+      log_error "Failed to install packages from Brewfile"
+      exit 1
+    fi
+    echo ""
+    log_success "All packages installed successfully"
   else
-    log "Brewfile not found at $DOTFILES_PATH. Skipping Homebrew Bundle."
+    log_error "Brewfile not found at $DOTFILES_PATH"
+    exit 1
   fi
 }
 
 link_dotfiles() {
+  log_divider
+  log_step "Linking dotfiles..."
+
   if command -v rcup >/dev/null 2>&1; then
-    log "Linking dotfiles with rcm..."
+    log_info "Symlinking configuration files..."
+    # Run rcup without hiding output (it may prompt for user input)
     env RCRC="$DOTFILES_PATH/rcrc" rcup
+    if [ $? -ne 0 ]; then
+      log_error "Failed to link dotfiles"
+      exit 1
+    fi
+    log_success "Dotfiles linked successfully"
   else
-    log "rcm is not installed. Please install it to link dotfiles."
+    log_error "rcm is not installed"
+    log_info "rcm should have been installed via Brewfile"
+    exit 1
   fi
 }
 
-# use with google-japanese-ime
-# softwareupdate --install-rosetta
+install_command_line_tools() {
+  log_divider
+  log_step "Checking Command Line Tools..."
 
-clone_dotfiles
-install_homebrew
-update_homebrew
-install_brew_bundle
-link_dotfiles
+  if ! xcode-select -p >/dev/null 2>&1; then
+    log_info "Command Line Tools not found"
+    log_info "A dialog will appear. Please click 'Install'"
 
-log "End!!!"
+    # Trigger the installation dialog
+    xcode-select --install 2>/dev/null || true
+
+    echo ""
+    log_info "This may take 5-10 minutes"
+    start_spinner "Waiting for Command Line Tools installation..."
+
+    # Wait for installation to complete
+    until xcode-select -p >/dev/null 2>&1; do
+      sleep 5
+    done
+    stop_spinner
+
+    log_success "Command Line Tools installed successfully"
+  else
+    log_success "Command Line Tools are already installed"
+  fi
+}
+
+install_rosetta() {
+  log_divider
+  log_step "Checking Rosetta 2..."
+
+  if [ "$(uname -m)" = "arm64" ]; then
+    if ! pgrep -q oahd >/dev/null 2>&1; then
+      log_info "Installing Rosetta 2 for Intel app compatibility"
+      softwareupdate --install-rosetta --agree-to-license
+      if [ $? -ne 0 ]; then
+        log_error "Failed to install Rosetta 2"
+        exit 1
+      fi
+      log_success "Rosetta 2 installed successfully"
+    else
+      log_success "Rosetta 2 is already installed"
+    fi
+  else
+    log_info "Intel Mac detected - Rosetta 2 not needed"
+  fi
+}
+
+# ==================== Main Execution ====================
+
+main() {
+  log_header "🚀 Dotfiles Setup Starting..."
+
+  install_command_line_tools
+  clone_dotfiles
+  install_rosetta
+  install_homebrew
+  update_homebrew
+  install_brew_bundle
+  link_dotfiles
+
+  log_divider
+  log_header "✨ Dotfiles Setup Complete!"
+  echo ""
+  log_success "Your development environment is ready!"
+  log_info "You may need to restart your terminal for all changes to take effect"
+  echo ""
+}
+
+# Run main function
+main
