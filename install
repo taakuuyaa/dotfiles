@@ -186,20 +186,24 @@ install_brew_bundle() {
 
 link_dotfiles() {
   log_divider
-  log_step "Linking dotfiles..."
+  log_step "Applying dotfiles with chezmoi..."
 
-  if command -v rcup >/dev/null 2>&1; then
-    log_info "Symlinking configuration files..."
-    # Run rcup without hiding output (it may prompt for user input)
-    env RCRC="$DOTFILES_PATH/rcrc" rcup
+  if command -v chezmoi >/dev/null 2>&1; then
+    log_info "Initializing chezmoi..."
+    # Initialize chezmoi with the dotfiles directory as source
+    chezmoi init --source="$DOTFILES_PATH" >/dev/null 2>&1
+
+    log_info "Applying dotfiles..."
+    # Apply dotfiles (run with visible output for any prompts)
+    chezmoi apply -v
     if [ $? -ne 0 ]; then
-      log_error "Failed to link dotfiles"
+      log_error "Failed to apply dotfiles"
       exit 1
     fi
-    log_success "Dotfiles linked successfully"
+    log_success "Dotfiles applied successfully"
   else
-    log_error "rcm is not installed"
-    log_info "rcm should have been installed via Brewfile"
+    log_error "chezmoi is not installed"
+    log_info "chezmoi should have been installed via Brewfile"
     exit 1
   fi
 }

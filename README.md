@@ -16,7 +16,7 @@ A collection of personal dotfiles and configuration settings to quickly set up a
 
 This repository contains dotfiles managed by the following tools:
 
-- [rcm](https://github.com/thoughtbot/rcm) - A management suite for dotfiles
+- [chezmoi](https://www.chezmoi.io/) - Manage your dotfiles across multiple machines
 - [Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) - Bundler for non-Ruby dependencies from Homebrew
 - [mise](https://github.com/jdx/mise) - Dev tools, environment variables, tasks (replacing asdf)
 
@@ -39,11 +39,17 @@ This repository contains dotfiles managed by the following tools:
 
 ## 🚀 Installation
 
-### One-Line Installation
+### One-Line Installation (Recommended)
 
 ```sh
 curl -o - https://raw.githubusercontent.com/taakuuyaa/dotfiles/master/install | sh
 ```
+
+This will:
+1. Install Command Line Tools, Homebrew, and required dependencies
+2. Clone this repository to `~/dotfiles`
+3. Install all packages from Brewfile
+4. Set up chezmoi and apply dotfiles
 
 ### Manual Installation
 
@@ -54,28 +60,32 @@ If you prefer to install step by step:
    git clone https://github.com/taakuuyaa/dotfiles.git ~/dotfiles
    ```
 
-2. Navigate to the dotfiles directory:
+2. Run the install script:
    ```sh
    cd ~/dotfiles
+   ./install
    ```
 
-3. Run the install script:
+3. After the install script completes, apply dotfiles with chezmoi:
    ```sh
-   ./install
+   chezmoi init --source=~/dotfiles
+   chezmoi apply -v
    ```
 
 ## 🔄 What Happens During Installation
 
-The installation script performs the following actions:
+The `install` script performs the following actions:
 
-1. Clones this dotfiles repository to `~/dotfiles` (if not already present)
-2. Installs Homebrew (if not already installed)
-3. Updates Homebrew and runs `brew doctor`
-4. Installs packages defined in the Brewfile, including:
+1. Installs Command Line Tools (if not already installed)
+2. Installs Rosetta 2 on Apple Silicon Macs (if needed)
+3. Clones this dotfiles repository to `~/dotfiles` (if not already present)
+4. Installs Homebrew (if not already installed)
+5. Updates Homebrew and runs `brew doctor`
+6. Installs packages defined in the Brewfile, including:
    - CLI tools like git, jq, curl, etc.
    - Applications like Google Chrome, Slack, Docker, etc.
-5. Links dotfiles to your home directory using rcm
-6. Installs Rosetta 2 for compatibility with Google Japanese IME
+
+After running the install script, use chezmoi to apply dotfiles to your home directory.
 
 ## ⚙️ Included Configurations
 
@@ -97,20 +107,45 @@ The Brewfile includes various useful tools and applications:
 
 ## 🛠️ Customization
 
-After installation, you can customize your environment by:
+### Managing Dotfiles with chezmoi
 
-1. Modifying the dotfiles in your home directory
-2. Adding new configurations to the repository and re-running `rcup`
-3. Editing the Brewfile to add or remove packages
-
-To update your dotfiles after making changes to the repository:
+Edit dotfiles in the source directory:
 
 ```sh
-rcup
+chezmoi edit ~/.zshrc
 ```
 
-To update installed packages:
+Add new dotfiles:
 
 ```sh
-brew bundle --file=~/dotfiles/Brewfile
+chezmoi add ~/.config/newfile
 ```
+
+Apply changes:
+
+```sh
+chezmoi apply -v
+```
+
+Update from the repository:
+
+```sh
+chezmoi update -v
+```
+
+View differences:
+
+```sh
+chezmoi diff
+```
+
+### Update Homebrew Packages
+
+```sh
+brew bundle --file=~/dotfiles/dot_Brewfile
+```
+
+## 📚 Additional Resources
+
+- [chezmoi Documentation](https://www.chezmoi.io/user-guide/command-overview/)
+- [chezmoi Quick Start](https://www.chezmoi.io/quick-start/)
